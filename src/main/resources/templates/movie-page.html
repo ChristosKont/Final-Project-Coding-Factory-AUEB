@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +14,11 @@
 </head>
 <body>
 
+<div role="alert" class="alert alert-danger alert-dismissible fade show mb-0 text-center" th:if="${emailExistsError}" >
+    <th:block th:text="${error}"/> Try Again!
+    <a type="button" class="btn-close" th:href="@{/movies}"></a>
+</div>
+
 <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
 
     <div class="container-fluid">
@@ -21,12 +26,12 @@
         <a class="navbar-brand">MovieSharer</a>
 
         <span class="navbar-text text-white-50">
-            Welcome Back @username!!
+            Welcome Back @<th:block th:text="${username}"/>!!
           </span>
 
         <div class="d-flex align-items-center">
             <button type="button" class="btn btn-success px-3 me-3" onclick="openAddMovieForm()">Add Movie</button>
-            <button type="button" class="btn btn-primary px-3 me-3" onclick="">Sign Out</button>
+            <a type="button" class="btn btn-primary px-3 me-3" th:href="@{/signOut}">Sign Out</a>
         </div>
 
     </div>
@@ -36,38 +41,45 @@
 <main>
 
     <div class="sortBy">
-
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Sort By
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Likes</a></li>
-                <li><a class="dropdown-item" href="#">Dislikes</a></li>
-                <li><a class="dropdown-item" href="#">Date</a></li>
+                <li><a class="dropdown-item" role="button" th:href="@{/movies/orderByLikes}">Likes</a></li>
+                <li><a class="dropdown-item" role="button" th:href="@{/movies/orderByDislikes}">Dislikes</a></li>
+                <li><a class="dropdown-item" role="button" th:href="@{/movies/orderByDate}">Date</a></li>
             </ul>
         </div>
-
     </div>
 
-    <button type="button" class="btn btn-white border-0 text-black-50 px-3 me-2" onclick="">Clear Filters</button>
+    <a type="button" class="btn btn-white border-0 text-black-50 px-3 me-2" th:href="@{/movies}">Clear Filters</a>
 
-    <div class="movie-card">
+    <div th:each="movie : ${movies}" class="movie-card">
 
         <div class="card bg-light">
 
             <div class="card-body">
 
-                <h5 class="card-title">Movie Name</h5>
+                <h5 class="card-title d-inline-block" th:text="${movie.getTitle()}"> </h5>
+                <h6 class="d-inline text-black-50"> - <th:block th:text="${movie.getDuration()}"/> min</h6>
 
-                <h6 class="card-subtitle mb-2 text-muted">Posted by @username - 5/6/2024</h6>
+                <div class="d-inline" th:with="newMovieId=${movie.id}" style="padding-left: 20px;">
+                    <a th:if="${movie.getMovieUser().getId() == userId}" th:href="@{/formUpdateMovie/{movieId}(movieId = ${movie.id})}" type="button" title="edit" class="btn fa-solid fa-pen-to-square"></a>
+                    <a th:if="${movie.getMovieUser().getId() == userId}" th:href="@{/delete/{movieId}(movieId = ${movie.id})}" type="button" title="delete" class="btn text-danger fa-solid fa-trash"></a>
+                </div>
 
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Asperiores nobis, tenetur laborum aliquid dolor eius!
-                    Laudantium quam consequuntur reprehenderit blanditiis veniam dicta quae officia debitis deserunt, placeat neque cum maiores.</p>
+                <h6 class="card-subtitle mb-2 text-muted">Posted by @<th:block th:text="${movie.getMovieUser().getUsername()}"/> - <th:block th:text="${#dates.format(movie.getTimestamp(), 'yyyy-MM-dd hh:mm:ss a')}"/></h6>
 
-                <button type="button" class="btn text-success fa-regular fa-thumbs-up ">10</button>
-                <button type="button" class="btn text-danger fa-regular fa-thumbs-down ">10</button>
+                <p class="card-text" th:text="${movie.getDescription()}"></p>
+
+                <h6 class="mb-2 text-muted">Directed by <th:block th:text="${movie.getDirector()}"/> - <th:block th:text="${movie.getType()}"/></h6>
+
+                <a type="button" title="like" class="btn text-success fa-regular fa-thumbs-up " th:text="${opinion.getMovieLikes(movie.id)}" th:href="@{/like/{movieId}(movieId=${movie.id})}"></a>
+                <a type="button" title="dislike" class="btn text-danger fa-regular fa-thumbs-down " th:text="${movie.getHates()}" th:href="@{/hate/{movieId}(movieId=${movie.id})}"></a>
+
+                <p class="d-inline-block text-success ms-5" th:if="${opinion.getLikesByMovieAndMovieUser(movie.id, userId)} > 0">You liked this movie!!</p>
+                <p class="d-inline-block text-danger ms-5" th:if="${opinion.getHatesByMovieAndMovieUser(movie.id, userId)} > 0">You disliked this movie!!</p>
 
             </div>
 
@@ -77,25 +89,31 @@
 
 </main>
 
-
 <div class="addMovie-form-popup" id="addMovieForm">
-    <form class="addMovie-form-container">
+    <form method="post" class="addMovie-form-container" th:object="${movie}" th:action="@{/addMovie}">
         <h2 class="text-center">Movie</h2>
 
         <label><b>Title</b></label>
-        <input type="text" placeholder="Title" name="title" required>
+        <input type="text" placeholder="Title" th:field="*{title}" name="title" maxlength="27" required>
 
         <label><b>Type</b></label>
-        <input type="text" placeholder="Type" name="type" required>
+        <select name="genre" id="typeOfMovie" th:field="*{type}" required>
+            <option value="" selected disabled>Choose Film Genre</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Horror">Horror</option>
+            <option value="Drama">Drama</option>
+            <option value="Action">Action</option>
+            <option value="Romance">Romance</option>
+        </select>
 
         <label><b>Duration</b></label>
-        <input type="number" placeholder="Duration" name="duration" required>
+        <input type="number" placeholder="Duration" th:field="*{duration}" min="1" max="300" name="duration" required>
 
         <label><b>Director</b></label>
-        <input type="text" placeholder="Director" name="director" required>
+        <input type="text" placeholder="Director" th:field="*{director}" name="director" maxlength="27" required>
 
-        <label for="description"><b>Description</b></label>
-        <textarea name="description" id="description"></textarea>
+        <label for="description1"><b>Description</b></label>
+        <textarea name="description" id="description1" placeholder="*include actors*" maxlength="200"  th:field="*{description}" required></textarea>
 
         <button type="submit" class="btn btn-success" onsubmit="closeAddMovieForm()">Add</button>
         <button type="button" class="btn btn-danger" onclick="closeAddMovieForm()">Close</button>
@@ -111,6 +129,7 @@
     function closeAddMovieForm() {
         document.getElementById("addMovieForm").style.display = "none";
     }
+
 </script>
 
 <footer class="bg-body-tertiary text-center text-lg-start">
@@ -142,7 +161,7 @@
     </section>
 
     <div class="text-center text-white p-2 bg-dark">
-        © 2024 Copyright
+        © 2024 Copyright - Christos Dimitrios Kontodimas
     </div>
 
 </footer>

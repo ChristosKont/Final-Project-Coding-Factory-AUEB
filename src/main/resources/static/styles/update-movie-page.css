@@ -1,0 +1,46 @@
+body {
+    flex: auto;
+    background-image: url(../images/HD-Cool-Blue-Wallpaper.jpg);
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.updateMovie-form-popup {
+    position: absolute;
+    top: 5%;
+    left: 40%;
+    padding: 0;
+}
+
+.updateMovie-form-container {
+    border-radius: 10px;
+    max-width: 380px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: whitesmoke;
+}
+
+.updateMovie-form-container input[type=text], .updateMovie-form-container input[type=number], .updateMovie-form-container textarea, .updateMovie-form-container select {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0 15px 0;
+    border: none;
+    resize: none;
+    border-radius: 10px;
+    background: lightgray;
+}
+
+.updateMovie-form-container input[type=text]:focus, .updateMovie-form-container input[type=number]:focus, .updateMovie-form-container textarea:focus, .updateMovie-form-container select:focus{
+    background-color: aliceblue;
+    outline: none;
+}
+
+.updateMovie-form-container .btn {
+    padding: 10px 10px;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.9;
+}

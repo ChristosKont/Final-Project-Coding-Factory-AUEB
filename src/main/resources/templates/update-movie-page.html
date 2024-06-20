@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieSharer</title>
+
+    <link rel="icon" href="../images/tab-image.ico" alt="MovieSharer">
+    <link rel="stylesheet" href="../styles/update-movie-page.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <div class="updateMovie-form-popup" id="updateMovieForm">
+        <form method="post" class="updateMovie-form-container" th:object="${movie}" th:action="@{/update/{movieId}(movieId = ${movie.id} )}">
+            <h2 class="text-center">Edit Your Movie</h2>
+
+            <label><b>Title</b></label>
+            <input type="text" placeholder="Title" th:field="*{title}" name="title" maxlength="27" required>
+
+            <label><b>Type</b></label>
+            <select name="genre" id="typeOfMovie" th:field="*{type}" required>
+                <option value="" selected disabled>Choose Film Genre</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Horror">Horror</option>
+                <option value="Drama">Drama</option>
+                <option value="Action">Action</option>
+                <option value="Romance">Romance</option>
+            </select>
+
+            <label><b>Duration</b></label>
+            <input type="number" placeholder="Duration" th:field="*{duration}" min="1" max="300" name="duration" required>
+
+            <label><b>Director</b></label>
+            <input type="text" placeholder="Director" th:field="*{director}" name="director" maxlength="27" required>
+
+            <label for="description2"><b>Description</b></label>
+            <textarea name="description" id="description2" th:field="*{description}" placeholder="*include actors*" maxlength="200" required></textarea>
+
+            <button type="submit" class="btn btn-success">Update</button>
+            <a type="button" class="btn btn-danger" th:href="@{/movies}">Back</a>
+        </form>
+    </div>
+
+</body>
+</html>

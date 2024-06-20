@@ -23,7 +23,7 @@ main .movie-card{
 }
 
 main .card {
-    width: 40%;
+    width: 50%;
     border-style: outset;
     border-color: gray;
     border-width: 2px;
@@ -52,16 +52,17 @@ main .sortBy {
     background-color: whitesmoke;
 }
 
-.addMovie-form-container input[type=text], .addMovie-form-container input[type=number], .addMovie-form-container textarea {
+.addMovie-form-container input[type=text], .addMovie-form-container input[type=number], .addMovie-form-container textarea, .addMovie-form-container select {
     width: 100%;
     padding: 8px;
     margin: 10px 0 15px 0;
     border: none;
+    resize: none;
     border-radius: 10px;
     background: lightgray;
 }
 
-.addMovie-form-container input[type=text]:focus, .addMovie-form-container input[type=number]:focus, .addMovie-form-container textarea:focus {
+.addMovie-form-container input[type=text]:focus, .addMovie-form-container input[type=number]:focus, .addMovie-form-container textarea:focus, .addMovie-form-container select:focus {
     background-color: aliceblue;
     outline: none;
 }

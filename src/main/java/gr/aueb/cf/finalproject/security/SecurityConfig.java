@@ -1,5 +1,6 @@
 package gr.aueb.cf.finalproject.security;
 
+import gr.aueb.cf.finalproject.model.MovieUser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,14 +13,13 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class SecurityConfig {
-
-//    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/about-us").permitAll()
                         .requestMatchers(HttpMethod.DELETE).permitAll()
                         .requestMatchers(HttpMethod.POST).permitAll()
                         .requestMatchers(HttpMethod.GET).permitAll()

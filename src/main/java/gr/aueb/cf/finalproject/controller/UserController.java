@@ -1,42 +1,57 @@
 package gr.aueb.cf.finalproject.controller;
 
-import gr.aueb.cf.finalproject.dto.MovieUserDTO;
-import gr.aueb.cf.finalproject.model.MovieUsers;
+import gr.aueb.cf.finalproject.dto.LoginMovieUserDTO;
+import gr.aueb.cf.finalproject.model.MovieUser;
 import gr.aueb.cf.finalproject.service.UserServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-
+@Controller
 @AllArgsConstructor
-@RestController
-@RequestMapping("/user")
 public class UserController {
 
     UserServiceImpl userService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<MovieUsers> getMovieUser(@PathVariable Long id) {
-        return new ResponseEntity<>(userService.getMovieUser(id), HttpStatus.OK);
+    @GetMapping("/")
+    public String getIndex(Model model) {
+        model.addAttribute("movieUser", new MovieUser());
+        model.addAttribute("loginMovieUser", new LoginMovieUserDTO());
+        return "index";
     }
 
-    @PostMapping
-    public ResponseEntity<MovieUserDTO> saveMovieUser(@Valid @RequestBody MovieUsers movieUser) {
-        MovieUsers user = userService.addMovieUser(movieUser);
-        return new ResponseEntity<>(new MovieUserDTO(user.getUsername(), user.getEmail(), user.getFirstName(), user.getLastName(), user.getBirthDate()), HttpStatus.CREATED);
+    @GetMapping("/about-us")
+    public String getAboutUsPage() {
+        return "about-us-page";
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteMovieUser(@PathVariable Long id) {
-        userService.deleteMovieUser(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @PostMapping("/registerUser")
+    public String registerUser(@Valid MovieUser movieUser, BindingResult result, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+        if(result.hasErrors()) return null;
+
+        MovieUser newUser = userService.addMovieUser(movieUser);
+
+        redirectAttributes.addFlashAttribute("userId", newUser.getId());
+
+        request.getSession().setAttribute("userId", newUser.getId());
+
+        return "redirect:/movies";
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<MovieUsers>> getAllMovieUsers() {
-        return new ResponseEntity<>(userService.getMovieUsers(), HttpStatus.OK);
+    @PostMapping("/loginUser")
+    public String loginUser(LoginMovieUserDTO movieUser, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+
+        MovieUser loggedInUser = userService.findMovieUserByUsername(movieUser.getUsername(), movieUser.getPassword());
+
+        redirectAttributes.addFlashAttribute("userId", loggedInUser.getId());
+        request.getSession().setAttribute("userId",loggedInUser.getId());
+
+        return "redirect:/movies";
     }
 }

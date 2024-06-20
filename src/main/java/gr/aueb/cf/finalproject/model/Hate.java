@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "hates")
-public class Hates {
+public class Hate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +21,9 @@ public class Hates {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private MovieUsers movieUserHated;
+    private MovieUser movieUserHated;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "movie_id", referencedColumnName = "id")
-    private Movies movieHated;
+    private Movie movieHated;
 }

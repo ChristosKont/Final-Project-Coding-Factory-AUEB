@@ -9,17 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class MovieDTO {
-
-    private String title;
-
-    private String description;
-
-    private String type;
-
-    private int duration;
-
-    private String director;
-
-    private MovieUserDTO movieUserDTO;
+public class LoginMovieUserDTO {
+    private String username;
+    private String password;
 }

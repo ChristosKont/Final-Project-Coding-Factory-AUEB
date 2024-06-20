@@ -1,10 +1,12 @@
 package gr.aueb.cf.finalproject.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-
+import org.springframework.format.annotation.DateTimeFormat;
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -13,7 +15,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "movies")
-public class Movies {
+public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +40,9 @@ public class Movies {
     private String director;
 
     @Column(name = "timestamp")
-    private String timestamp;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+    private Date timestamp = new Date();
 
     @Column(name = "likes")
     private int likes;
@@ -48,13 +52,13 @@ public class Movies {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private MovieUsers movieUser;
+    private MovieUser movieUser;
 
     @JsonIgnore
     @OneToMany(mappedBy = "movieLiked", cascade = CascadeType.ALL)
-    private List<Likes> movieLikes;
+    private List<Like> movieLikes;
 
     @JsonIgnore
     @OneToMany(mappedBy = "movieHated", cascade = CascadeType.ALL)
-    private List<Hates> movieHates;
+    private List<Hate> movieHates;
 }

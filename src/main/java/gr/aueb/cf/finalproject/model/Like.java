@@ -6,15 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Table(name = "likes")
-public class Likes {
+public class Like {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +21,10 @@ public class Likes {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private MovieUsers movieUserLiked;
+    private MovieUser movieUserLiked;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "movie_id", referencedColumnName = "id")
-    private Movies movieLiked;
-
+    private Movie movieLiked;
 
 }
