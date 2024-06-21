@@ -7,11 +7,10 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Getter
 @Setter
@@ -25,6 +24,9 @@ public class MovieUser implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.USER;
 
     @NotBlank
     @NonNull
@@ -72,7 +74,7 @@ public class MovieUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override
@@ -94,4 +96,5 @@ public class MovieUser implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
+
 }

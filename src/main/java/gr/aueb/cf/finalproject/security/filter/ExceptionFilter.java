@@ -7,13 +7,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.filter.OncePerRequestFilter;
-
 import java.io.IOException;
 
-/*
-This is the first filter that is going to run. If an exception occurs here we are going to catch it and return back
-an appropriate response back to the user.
- */
 public class ExceptionFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -21,16 +16,16 @@ public class ExceptionFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         } catch (EntityNotFoundException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("Wrong username");    // <--
+            response.getWriter().write("Wrong username");
             response.getWriter().flush();
 
         } catch (JWTVerificationException e) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            response.getWriter().write("JWT not valid");    // <--
+            response.getWriter().write("JWT not valid");
             response.getWriter().flush();
         } catch (RuntimeException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("BAD REQUEST");    // <--
+            response.getWriter().write("BAD REQUEST");
             response.getWriter().flush();
         }
     }

@@ -23,6 +23,11 @@
     <a type="button" class="btn-close" th:href="@{/}"></a>
 </div>
 
+<div role="alert" class="alert alert-success alert-dismissible fade show mb-0 text-center" th:if="${register}" >
+    <th:block th:text="${msgReg}"/>
+    <a type="button" class="btn-close" th:href="@{/}"></a>
+</div>
+
 <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
 
     <div class="container-fluid">
@@ -54,7 +59,7 @@
 
 <main>
 
-    <marquee class="text-white"><h2>Join Us and Share your favorite movies in "MovieSharer"</h2></marquee>
+    <marquee class="text-white"><h2>Join Us And Share Your Favorite Movies On "MovieSharer"</h2></marquee>
 
 </main>
 
@@ -117,7 +122,7 @@
         <input type="text" placeholder="Lastname" th:field="*{lastName}" name="lastname">
 
         <label><b>BirthDate</b></label>
-        <input type="date" placeholder="BirthDate" th:field="*{birthDate}" name="birthday" min="1900-01-01" max="2006-12-31">
+        <input type="date" placeholder="BirthDate" th:field="*{birthDate}" name="birthday" min="1900-01-01" max="2006-12-31" required>
 
         <label><b>Email</b></label>
         <input type="text" placeholder="@example.com" th:field="*{email}" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" name="email" required>

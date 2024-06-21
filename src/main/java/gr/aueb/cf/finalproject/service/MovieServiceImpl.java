@@ -26,7 +26,6 @@ public class MovieServiceImpl implements IMovieService {
 
     @Override
     public Movie addMovie(Movie movie, Long userId) {
-//        if (movieRepository.findByTitle(movie.getTitle()).isPresent()) throw new MovieTitleAlreadyExistsException(movie.getTitle());
 
         Optional<MovieUser> movieUser = userRepository.findById(userId);
         MovieUser user = UserServiceImpl.unwrapMovieUser(movieUser, userId);

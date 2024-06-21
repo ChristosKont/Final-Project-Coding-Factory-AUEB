@@ -23,7 +23,7 @@ public class UserRestController {
         return new ResponseEntity<>(userService.getMovieUser(id), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<MovieUserDTO> saveMovieUser(@Valid @RequestBody MovieUser movieUser) {
         MovieUser user = userService.addMovieUser(movieUser);
         return new ResponseEntity<>(new MovieUserDTO(user.getUsername(), user.getEmail(), user.getFirstName(), user.getLastName(), user.getBirthDate()), HttpStatus.CREATED);

@@ -32,16 +32,13 @@ public class UserController {
     }
 
     @PostMapping("/registerUser")
-    public String registerUser(@Valid MovieUser movieUser, BindingResult result, RedirectAttributes redirectAttributes, HttpServletRequest request) {
-        if(result.hasErrors()) return null;
+    public String registerUser(MovieUser movieUser, RedirectAttributes redirectAttributes, HttpServletRequest request) {
 
-        MovieUser newUser = userService.addMovieUser(movieUser);
+        userService.addMovieUser(movieUser);
+        redirectAttributes.addFlashAttribute("register", true);
+        redirectAttributes.addFlashAttribute("msgReg", "You have successfully registered to our website!!");
 
-        redirectAttributes.addFlashAttribute("userId", newUser.getId());
-
-        request.getSession().setAttribute("userId", newUser.getId());
-
-        return "redirect:/movies";
+        return "redirect:/";
     }
 
     @PostMapping("/loginUser")

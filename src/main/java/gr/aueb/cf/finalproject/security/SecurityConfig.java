@@ -1,6 +1,10 @@
 package gr.aueb.cf.finalproject.security;
 
-import gr.aueb.cf.finalproject.model.MovieUser;
+import gr.aueb.cf.finalproject.security.filter.AuthenticationFilter;
+import gr.aueb.cf.finalproject.security.filter.ExceptionFilter;
+import gr.aueb.cf.finalproject.security.filter.JWTAuthorizationFilter;
+import gr.aueb.cf.finalproject.security.manager.CustomAuthenticationManager;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -9,25 +13,34 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
+@AllArgsConstructor
 public class SecurityConfig {
+
+    private CustomAuthenticationManager authenticationManager;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManager);
+        authenticationFilter.setFilterProcessesUrl("/authenticate");
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/").permitAll()
-                        .requestMatchers("/about-us").permitAll()
-                        .requestMatchers(HttpMethod.DELETE).permitAll()
-                        .requestMatchers(HttpMethod.POST).permitAll()
-                        .requestMatchers(HttpMethod.GET).permitAll()
+                        .requestMatchers(HttpMethod.POST, "userRest/register").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/", "/movies/**", "/formUpdateMovie/**", "/about-us", "/delete/**", "/signOut", "/like/**", "/hate/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/registerUser", "/registerUser", "/addMovie", "/loginUser", "/update/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "").permitAll()
+                        .requestMatchers("/styles/**").permitAll()
+                        .requestMatchers("/js/**").permitAll()
+                        .requestMatchers("/images/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .httpBasic(withDefaults())
-                .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .addFilterBefore(new ExceptionFilter(), AuthenticationFilter.class)
+                .addFilter(authenticationFilter)
+                .addFilterAfter(new JWTAuthorizationFilter(), AuthenticationFilter.class)
+                .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                );
 
         return http.build();
     }
+
 }
