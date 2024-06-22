@@ -1,5 +1,3 @@
-github link for the project: 
-
 This is a website where you can share your favorite movies. First of all, there is a registration system where you can create your own account
 and a login system where you can sign in and see the movies that other users have shared. As a user, you have the ability to add your favorite movie
 with some details such as the title of the movie, the genre of the movie, description of the movie where you have to include actors etc. As an admin, you have the ability only
