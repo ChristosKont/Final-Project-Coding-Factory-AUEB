@@ -20,13 +20,6 @@ public class OpinionServiceImpl implements IOpinionService {
     private UserRepository userRepository;
     private MovieRepository movieRepository;
 
-    public int getLikesByMovieAndMovieUser(Long movieId, Long userId) {
-        MovieUser movieUser = UserServiceImpl.unwrapMovieUser(userRepository.findById(userId), userId);
-        Movie movie = MovieServiceImpl.unwrapMovie(movieRepository.findById(movieId), movieId);
-
-        return likeRepository.countLikesByMovieLikedAndMovieUserLiked(movie, movieUser);
-    }
-
     public int getMovieLikes(Long movieId) {
         Movie movie = MovieServiceImpl.unwrapMovie(movieRepository.findById(movieId), movieId);
         return movie.getLikes();
@@ -41,6 +34,13 @@ public class OpinionServiceImpl implements IOpinionService {
         movie.setLikes(movie.getLikes() + 1);
 
         likeRepository.save(like);
+    }
+
+    public int getLikesByMovieAndMovieUser(Long movieId, Long userId) {
+        MovieUser movieUser = UserServiceImpl.unwrapMovieUser(userRepository.findById(userId), userId);
+        Movie movie = MovieServiceImpl.unwrapMovie(movieRepository.findById(movieId), movieId);
+
+        return likeRepository.countLikesByMovieLikedAndMovieUserLiked(movie, movieUser);
     }
 
     public void deleteLike(Long movieId, Long userId) {

@@ -1,6 +1,7 @@
 package gr.aueb.cf.finalproject.service;
 
 import gr.aueb.cf.finalproject.model.MovieUser;
+import gr.aueb.cf.finalproject.model.Role;
 import gr.aueb.cf.finalproject.repository.UserRepository;
 import gr.aueb.cf.finalproject.service.exceptions.EmailAlreadyExistsException;
 import gr.aueb.cf.finalproject.service.exceptions.UsernameAlreadyExistsException;
@@ -34,7 +35,9 @@ public class UserServiceImpl implements IUserService {
     public MovieUser addMovieUser(MovieUser movieUser) {
         if (userRepository.findByUsername(movieUser.getUsername()).isPresent()) throw new UsernameAlreadyExistsException(movieUser.getUsername());
         if (userRepository.findByEmail(movieUser.getEmail()).isPresent()) throw new EmailAlreadyExistsException(movieUser.getEmail());
+        if (movieUser.getUsername().equals("admin")) { movieUser.setRole(Role.ADMIN);}
         movieUser.setPassword(passwordEncoder.encode(movieUser.getPassword()));
+
         return userRepository.save(movieUser);
     }
 

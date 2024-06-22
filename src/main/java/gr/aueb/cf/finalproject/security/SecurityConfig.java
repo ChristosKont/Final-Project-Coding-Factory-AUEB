@@ -28,7 +28,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "userRest/register").permitAll()
                         .requestMatchers(HttpMethod.GET, "/", "/movies/**", "/formUpdateMovie/**", "/about-us", "/delete/**", "/signOut", "/like/**", "/hate/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/registerUser", "/registerUser", "/addMovie", "/loginUser", "/update/**").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "").permitAll()
                         .requestMatchers("/styles/**").permitAll()
                         .requestMatchers("/js/**").permitAll()
                         .requestMatchers("/images/**").permitAll()

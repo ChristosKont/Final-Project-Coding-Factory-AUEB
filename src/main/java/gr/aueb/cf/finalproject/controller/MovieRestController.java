@@ -16,11 +16,11 @@ import java.util.List;
 @RequestMapping("/movieRest")
 public class MovieRestController {
 
-   MovieServiceImpl movieService;
+    MovieServiceImpl movieService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<MovieDTO> getMovieUser(@PathVariable Long id) {
-        Movie movie = movieService.getMovie(id);
+    @GetMapping("/{movieId}")
+    public ResponseEntity<MovieDTO> getMovie(@PathVariable Long movieId) {
+        Movie movie = movieService.getMovie(movieId);
         MovieUserDTO userDTO = new MovieUserDTO(movie.getMovieUser().getUsername(), movie.getMovieUser().getEmail(), movie.getMovieUser().getFirstName(), movie.getMovieUser().getLastName(), movie.getMovieUser().getBirthDate());
         MovieDTO movieDTO = new MovieDTO(movie.getTitle(), movie.getDescription(), movie.getType(), movie.getDuration(), movie.getDirector(), userDTO);
         return new ResponseEntity<>(movieDTO, HttpStatus.OK);
@@ -34,22 +34,29 @@ public class MovieRestController {
         return new ResponseEntity<>(movieDTO, HttpStatus.CREATED);
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<Movie>> getAllMovieUsers() {
-        return new ResponseEntity<>(movieService.getMovies(), HttpStatus.OK);
-    }
-
     @GetMapping("/user/{id}")
     public ResponseEntity<List<Movie>> getMoviesByUser(@PathVariable Long id) {
         return new ResponseEntity<>(movieService.getMoviesByUser(id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<HttpStatus> deleteMovieUser(@PathVariable Long id) {
-        movieService.deleteMovie(id);
+    @DeleteMapping("/delete/{movieId}")
+    public ResponseEntity<HttpStatus> deleteMovieUser(@PathVariable Long movieId) {
+        movieService.deleteMovie(movieId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<MovieDTO> updateMovie()
+    @PutMapping("/update/{movieId}")
+    public ResponseEntity<MovieDTO> updateMovie(@PathVariable Long movieId, @RequestBody Movie movie) {
+        movieService.updateMovie(movieId, movie);
+        Movie movieUpdated = movieService.getMovie(movieId);
+        MovieUserDTO userDTO = new MovieUserDTO(movieUpdated.getMovieUser().getUsername(), movieUpdated.getMovieUser().getEmail(), movieUpdated.getMovieUser().getFirstName(), movieUpdated.getMovieUser().getLastName(), movieUpdated.getMovieUser().getBirthDate());
+        MovieDTO movieDTO = new MovieDTO(movieUpdated.getTitle(), movieUpdated.getDescription(), movieUpdated.getType(), movieUpdated.getDuration(), movieUpdated.getDirector(), userDTO);
+
+        return new ResponseEntity<>(movieDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Movie>> getAllMovies() {
+        return new ResponseEntity<>(movieService.getMovies(), HttpStatus.OK);
+    }
 }
