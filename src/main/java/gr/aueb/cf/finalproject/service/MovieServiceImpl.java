@@ -81,4 +81,5 @@ public class MovieServiceImpl implements IMovieService {
         if (entity.isPresent()) return entity.get();
         else throw new EntityNotFoundException(id, Movie.class);
     }
+
 }

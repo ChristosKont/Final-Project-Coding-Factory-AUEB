@@ -18,5 +18,6 @@ public class ErrorRestResponse {
     public ErrorRestResponse(List<String> message) {
         this.timestamp = LocalDateTime.now();
         this.message = message;
+
     }
 }

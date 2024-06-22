@@ -4,7 +4,6 @@ import gr.aueb.cf.finalproject.model.Movie;
 
 import java.util.List;
 import java.util.Optional;
-
 public interface IMovieService {
     Movie getMovie(Long id);
     Movie addMovie(Movie movie, Long userId);

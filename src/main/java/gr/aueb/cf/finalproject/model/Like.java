@@ -26,5 +26,4 @@ public class Like {
     @ManyToOne(optional = false)
     @JoinColumn(name = "movie_id", referencedColumnName = "id")
     private Movie movieLiked;
-
 }

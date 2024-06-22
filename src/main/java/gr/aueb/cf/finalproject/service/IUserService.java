@@ -4,7 +4,6 @@ import gr.aueb.cf.finalproject.model.MovieUser;
 
 import java.util.List;
 import java.util.Optional;
-
 public interface IUserService {
 
     MovieUser getMovieUser(Long id);

@@ -13,7 +13,6 @@ import lombok.Setter;
 @Setter
 @Table(name = "hates")
 public class Hate {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

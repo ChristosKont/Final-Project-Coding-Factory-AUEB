@@ -8,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
+
 public interface LikeRepository extends CrudRepository<Like, Long> {
     int countLikesByMovieLikedAndMovieUserLiked(Movie movie, MovieUser movieUser);
     Optional<Like> getLikesByMovieUserLiked_Id(Long userId);

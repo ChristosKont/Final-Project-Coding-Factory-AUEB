@@ -57,7 +57,6 @@ public class UserServiceImpl implements IUserService {
         if (!passwordEncoder.matches(password, movieUser.getPassword())) {
             throw new BadCredentialsException("You provided incorrect username or password");
         }
-
         return movieUser;
     }
 

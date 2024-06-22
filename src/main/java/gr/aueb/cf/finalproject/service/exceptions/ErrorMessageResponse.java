@@ -1,7 +1,6 @@
 package gr.aueb.cf.finalproject.service.exceptions;
 
 import lombok.*;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

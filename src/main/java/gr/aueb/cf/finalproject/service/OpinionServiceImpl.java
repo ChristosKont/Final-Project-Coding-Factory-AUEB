@@ -11,6 +11,7 @@ import gr.aueb.cf.finalproject.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+
 @AllArgsConstructor
 @Service
 public class OpinionServiceImpl implements IOpinionService {
