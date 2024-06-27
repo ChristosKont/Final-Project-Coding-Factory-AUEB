@@ -5,3 +5,5 @@ with some details such as the title of the movie, the genre of the movie, descri
 Moreover, if someone doesn't have the time to search all the movies that users have posted, he/she has the ability to filter the movies by sorting them in descending order based on the date the movie was uploaded by the user,
 likes and dislikes. Moreover, users can edit their own uploaded movies or delete them. Finally, there is a JWT authentication system for the Rest API.
 The technology that has been used in this website is Spring Boot, MySQL, Thymeleaf, Html, Css & Bootstrap.
+
+**Remember to insert your own username, password and database name in the application.properties.**
