@@ -30,7 +30,7 @@
           </span>
 
         <div class="d-flex align-items-center">
-            <button type="button" class="btn btn-success px-3 me-3" th:if="${!username.equals('admin')}" onclick="openAddMovieForm()">Add Movie</button>
+            <button type="button" class="btn btn-success px-3 me-3" th:if="${!username.equals('admin') && !username.equals('ADMIN')}" onclick="openAddMovieForm()">Add Movie</button>
             <a type="button" class="btn btn-primary px-3 me-3" th:href="@{/signOut}">Sign Out</a>
         </div>
 
@@ -69,8 +69,8 @@
                     <a th:if="${movie.getMovieUser().getId() == userId}" th:href="@{/formUpdateMovie/{movieId}(movieId = ${movie.id})}" type="button" title="edit" class="btn fa-solid fa-pen-to-square"></a>
                     <a th:if="${movie.getMovieUser().getId() == userId}" th:href="@{/delete/{movieId}(movieId = ${movie.id})}" type="button" title="delete" class="btn text-danger fa-solid fa-trash"></a>
                                                                           <!-- admin -->
-                    <a th:if="${username.equals('admin')}" th:href="@{/formUpdateMovie/{movieId}(movieId = ${movie.id})}" type="button" title="edit" class="btn fa-solid fa-pen-to-square"></a>
-                    <a th:if="${username.equals('admin')}" th:href="@{/delete/{movieId}(movieId = ${movie.id})}" type="button" title="delete" class="btn text-danger fa-solid fa-trash"></a>
+                    <a th:if="${username.equals('admin') || username.equals('ADMIN')}" th:href="@{/formUpdateMovie/{movieId}(movieId = ${movie.id})}" type="button" title="edit" class="btn fa-solid fa-pen-to-square"></a>
+                    <a th:if="${username.equals('admin') || username.equals('ADMIN')}" th:href="@{/delete/{movieId}(movieId = ${movie.id})}" type="button" title="delete" class="btn text-danger fa-solid fa-trash"></a>
 
                 </div>
 
@@ -80,8 +80,8 @@
 
                 <h6 class="mb-2 text-muted">Directed by <th:block th:text="${movie.getDirector()}"/> - <th:block th:text="${movie.getType()}"/></h6>
 
-                <a type="button" title="like" class="btn text-success fa-regular fa-thumbs-up" th:if="${!username.equals('admin')}" th:text="${opinion.getMovieLikes(movie.id)}" th:href="@{/like/{movieId}(movieId=${movie.id})}"></a>
-                <a type="button" title="dislike" class="btn text-danger fa-regular fa-thumbs-down" th:if="${!username.equals('admin')}" th:text="${movie.getHates()}" th:href="@{/hate/{movieId}(movieId=${movie.id})}"></a>
+                <a type="button" title="like" class="btn text-success fa-regular fa-thumbs-up" th:if="${!username.equals('admin') && !username.equals('ADMIN')}" th:text="${opinion.getMovieLikes(movie.id)}" th:href="@{/like/{movieId}(movieId=${movie.id})}"></a>
+                <a type="button" title="dislike" class="btn text-danger fa-regular fa-thumbs-down" th:if="${!username.equals('admin') && !username.equals('ADMIN')}" th:text="${movie.getHates()}" th:href="@{/hate/{movieId}(movieId=${movie.id})}"></a>
 
                 <p class="d-inline-block text-success ms-5" th:if="${opinion.getLikesByMovieAndMovieUser(movie.id, userId)} > 0">You liked this movie!!</p>
                 <p class="d-inline-block text-danger ms-5" th:if="${opinion.getHatesByMovieAndMovieUser(movie.id, userId)} > 0">You disliked this movie!!</p>

@@ -35,7 +35,7 @@ public class UserServiceImpl implements IUserService {
     public MovieUser addMovieUser(MovieUser movieUser) {
         if (userRepository.findByUsername(movieUser.getUsername()).isPresent()) throw new UsernameAlreadyExistsException(movieUser.getUsername());
         if (userRepository.findByEmail(movieUser.getEmail()).isPresent()) throw new EmailAlreadyExistsException(movieUser.getEmail());
-        if (movieUser.getUsername().equals("admin")) { movieUser.setRole(Role.ADMIN);}
+        if (movieUser.getUsername().equals("admin") || movieUser.getUsername().equals("ADMIN")) { movieUser.setRole(Role.ADMIN);}
         movieUser.setPassword(passwordEncoder.encode(movieUser.getPassword()));
 
         return userRepository.save(movieUser);
