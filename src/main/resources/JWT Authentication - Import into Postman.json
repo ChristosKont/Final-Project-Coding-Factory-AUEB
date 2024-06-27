@@ -1,0 +1,459 @@
+{
+	"info": {
+		"_postman_id": "ea5e0117-c822-45f9-86b3-73690b70d0db",
+		"name": "Final Project Movies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33245109"
+	},
+	"item": [
+		{
+			"name": "Movie User",
+			"item": [
+				{
+					"name": "Get Movie User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmd3RpczAwMCIsImV4cCI6MTcxOTA1NTcyM30.usYWTvPVX930eKQUNCe-sCiOstMmANcZLmtgP9lFO9FXClDdeFx-kHlHGQX1UsELI35d1bnHp39Xaqr8t3a84A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/userRest/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"userRest",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Movie Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmd3RpczAwMCIsImV4cCI6MTcxOTA1NTcyM30.usYWTvPVX930eKQUNCe-sCiOstMmANcZLmtgP9lFO9FXClDdeFx-kHlHGQX1UsELI35d1bnHp39Xaqr8t3a84A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/userRest/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"userRest",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Movie User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"fwtis000\",\r\n    \"password\" : \"124245\",\r\n    \"email\" : \"fwtis@gmail.com\",\r\n    \"firstName\" : \"fwtis\",\r\n    \"lastName\" : \"koliastasis\",\r\n    \"birthDate\" : \"19/12/2000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/userRest/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"userRest",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Movie User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmd3RpczAwMCIsImV4cCI6MTcxOTA1NTcyM30.usYWTvPVX930eKQUNCe-sCiOstMmANcZLmtgP9lFO9FXClDdeFx-kHlHGQX1UsELI35d1bnHp39Xaqr8t3a84A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/userRest/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"userRest",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movie",
+			"item": [
+				{
+					"name": "Get Movie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjaHJpczEyMyIsImV4cCI6MTcxOTA2MTM5NH0.1MB4YX8RD7TaRg5AaFQRY6TGZUPnFg4DAS7j_YM8YuJga0AHkCV6jANWFCccmGn0VPlVCPAb8wO-CqcmcxPLdw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/movieRest/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movieRest",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Movies",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjaHJpczEyMyIsImV4cCI6MTcxOTA2MTM5NH0.1MB4YX8RD7TaRg5AaFQRY6TGZUPnFg4DAS7j_YM8YuJga0AHkCV6jANWFCccmGn0VPlVCPAb8wO-CqcmcxPLdw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/movieRest/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movieRest",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Movie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjaHJpczEyMyIsImV4cCI6MTcxOTA2MTM5NH0.1MB4YX8RD7TaRg5AaFQRY6TGZUPnFg4DAS7j_YM8YuJga0AHkCV6jANWFCccmGn0VPlVCPAb8wO-CqcmcxPLdw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/movieRest/delete/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movieRest",
+								"delete",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Movie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjaHJpczEyMyIsImV4cCI6MTcxOTA2MTM5NH0.1MB4YX8RD7TaRg5AaFQRY6TGZUPnFg4DAS7j_YM8YuJga0AHkCV6jANWFCccmGn0VPlVCPAb8wO-CqcmcxPLdw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\" : \"Mr. Bean\",\r\n    \"description\" : \"This film is suitable for families. If you choose it, your night will be very excited!!\",\r\n    \"type\" : \"Comedy\",\r\n    \"duration\" : 118,\r\n    \"director\" : \"John Michael\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/movieRest/addMovie/user/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movieRest",
+								"addMovie",
+								"user",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Movies By User Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjaHJpczEyMyIsImV4cCI6MTcxOTA2MTM5NH0.1MB4YX8RD7TaRg5AaFQRY6TGZUPnFg4DAS7j_YM8YuJga0AHkCV6jANWFCccmGn0VPlVCPAb8wO-CqcmcxPLdw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/movieRest/user/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movieRest",
+								"user",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Movie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjaHJpczEyMyIsImV4cCI6MTcxOTA2MTM5NH0.1MB4YX8RD7TaRg5AaFQRY6TGZUPnFg4DAS7j_YM8YuJga0AHkCV6jANWFCccmGn0VPlVCPAb8wO-CqcmcxPLdw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Spiderman 2\",\r\n    \"description\": \"It's an action movie!!\\r\\n\",\r\n    \"type\": \"Action\",\r\n    \"duration\": 120,\r\n    \"director\": \"Mr. Example\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/movieRest/update/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movieRest",
+								"update",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Opinion",
+			"item": [
+				{
+					"name": "Add Like",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjaHJpczEyMyIsImV4cCI6MTcxOTA2MTM5NH0.1MB4YX8RD7TaRg5AaFQRY6TGZUPnFg4DAS7j_YM8YuJga0AHkCV6jANWFCccmGn0VPlVCPAb8wO-CqcmcxPLdw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/movieRest/opinion/like/user/2/movie/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movieRest",
+								"opinion",
+								"like",
+								"user",
+								"2",
+								"movie",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Hate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjaHJpczEyMyIsImV4cCI6MTcxOTA2MTM5NH0.1MB4YX8RD7TaRg5AaFQRY6TGZUPnFg4DAS7j_YM8YuJga0AHkCV6jANWFCccmGn0VPlVCPAb8wO-CqcmcxPLdw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/movieRest/opinion/dislike/user/2/movie/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movieRest",
+								"opinion",
+								"dislike",
+								"user",
+								"2",
+								"movie",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Authenticate Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmd3RpczAwMCIsImV4cCI6MTcxODk2MTczMn0.EfGISZIiGcWZPiiiQV8_kRyct_HUx1QfNm0BP0JScPjZcMJUrTcj8jFuSuLqlmLz348WAzKNEta4x2vLnggDpw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"chris123\",\r\n    \"password\" : \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/authenticate",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
