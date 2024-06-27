@@ -6,4 +6,4 @@ Moreover, if someone doesn't have the time to search all the movies that users h
 likes and dislikes. Moreover, users can edit their own uploaded movies or delete them. Finally, there is a JWT authentication system for the Rest API.
 The technology that has been used in this website is Spring Boot, MySQL, Thymeleaf, Html, Css & Bootstrap.
 
-**Remember to insert your own username, password and database name in the application.properties.**
+***Remember to insert your own username, password and database name in the application.properties.**
